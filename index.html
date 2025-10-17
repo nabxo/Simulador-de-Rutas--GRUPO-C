@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador de rutas y costos del transporte público dominicano">
+    <title>Las rutas de Santo Domingo - Simulador de Transporte Público</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+ <header class="header">
+    <div class="header__container">
+        <h1 class="header__title">🚌Las Rutas de Santo Domingo</h1>
+        
+        <div class="header__controls">
+            <button class="btn btn--primary" id="langToggle" aria-label="Cambiar idioma">EN</button>
+            
+            <button 
+                class="btn btn--secondary" 
+                id="saveModeBtn" 
+                aria-label="Activar modo ahorro"
+                onclick="toggleSaveMode()"
+            >
+                💾 <span data-i18n="saveMode">Modo Ahorro</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+    <main class="main">
+        <section class="alert-bar">
+            <h2 class="alert-bar__title">⚠️ <span data-i18n="alerts">Alertas Activas</span></h2>
+            <div class="alert-bar__grid">
+                <label class="alert-toggle">
+                    <input type="checkbox" id="alert-rain" aria-label="Alerta de lluvia">
+                    <span data-i18n="rain">🌧️ Lluvia (+30% tiempo)</span>
+                </label>
+                <label class="alert-toggle">
+                    <input type="checkbox" id="alert-rush" aria-label="Alerta hora pico">
+                    <span data-i18n="rush">🚦 Hora Pico (+40% tiempo)</span>
+                </label>
+                <label class="alert-toggle">
+                    <input type="checkbox" id="alert-strike" aria-label="Alerta de paro">
+                    <span data-i18n="strike">✊ Paro (+50% tiempo, +RD$20)</span>
+                </label>
+            </div>
+        </section>
+
+        <div class="content-grid">
+            <article class="card" id="searchCard">
+                <h2 class="card__title" data-i18n="planRoute">Planifica tu Ruta</h2>
+                <form id="routeForm">
+                    <div class="form-group">
+                        <label for="origin" data-i18n="origin">Origen</label>
+                        <select id="origin" required aria-required="true">
+                            <option value="">Selecciona un barrio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination" data-i18n="destination">Destino</label>
+                        <select id="destination" required aria-required="true">
+                            <option value="">Selecciona un barrio</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transportFilter">Medio de Transporte</label>
+                        <select id="transportFilter" required aria-required="true">
+                            <option value="all">Todos los medios</option>
+                            <option value="carro_publico">🚗 Carro Público</option>
+                            <option value="guagua_publica">🚌 Guagua Pública</option>
+                            <option value="carro_pirata">🚐 Carro Pirata (Concho)</option>
+                            <option value="motoconcho">🏍️ Motoconcho</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn--primary btn--full" data-i18n="search">
+                        🔍 Buscar Rutas
+                    </button>
+                </form>
+            </article>
+
+            <article class="card" id="howItWorksCard">
+                <h2 class="card__title" data-i18n="howItWorks">¿Cómo Funciona?</h2>
+                <div class="instructions">
+                    <p data-i18n="calc1">
+                        <strong>Cálculo de Tiempo:</strong> Se suma el tiempo base de cada tramo. Por cada alerta activa, el tiempo se multiplica por (1 + porcentaje/100).
+                    </p>
+                    <p data-i18n="calc2">
+                        <strong>Cálculo de Costo:</strong> Se suma el costo de cada tramo más los costos extras de las alertas activas.
+                    </p>
+                    <p data-i18n="calc3">
+                        <strong>Ordenamiento:</strong> Por defecto se ordenan por tiempo, pero puedes cambiar a costo o número de transbordos.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+        <section class="map-container" id="mapContainer" style="display: none;">
+            <h2 class="card__title" data-i18n="routeMap">Mapa de Ruta</h2>
+            <svg class="map-svg" id="routeMap" viewBox="0 0 800 400" role="img" aria-label="Mapa visual de la ruta"></svg>
+        </section>
+
+        <section class="results" id="resultsSection" style="display: none;">
+            <div class="results__header">
+                <h2 class="card__title" data-i18n="availableRoutes">Rutas Disponibles</h2>
+                <div class="results__sort">
+                    <button class="btn btn--sort active" data-sort="time" data-i18n="sortTime">⏱️ Tiempo</button>
+                    <button class="btn btn--sort" data-sort="cost" data-i18n="sortCost">💰 Costo</button>
+                    <button class="btn btn--sort" data-sort="transfers" data-i18n="sortTransfers">🔄 Transbordos</button>
+                    <button class="btn btn--secondary" id="newSearchBtn">← Nueva Búsqueda</button>
+                </div>
+            </div>
+            <div id="routesContainer"></div>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title" data-i18n="favorites">⭐ Rutas Favoritas</h2>
+            <div id="favoritesContainer">
+                <div class="empty-state" data-i18n="noFavorites">No tienes rutas favoritas guardadas</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <h3 class="footer__title">las Rutas de Santo Domingo</h3>
+            <p class="footer__text" data-i18n="footerText">Simulador de rutas del transporte público dominicano</p>
+            <p class="footer__text">© 2025 - GRUPO C </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

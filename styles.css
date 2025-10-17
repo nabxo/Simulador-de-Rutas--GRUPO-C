@@ -1,0 +1,794 @@
+/* ================================================
+   Las rutas de Santo Domingo- Estilos Completos (Versión Dominicana)
+   ================================================ */
+
+/* ============================================
+   VARIABLES CSS (Ajuste Dominicano)
+   ============================================ */
+:root {
+    /* Colores primarios basados en la bandera dominicana */
+    --color-dominican-blue: #002c77; /* Azul Ultramar (Primary) */
+    --color-dominican-red: #d52b1e; /* Rojo Bermellón (Danger/Accent) */
+    --color-dominican-yellow: #ffc400; /* Amarillo Sol (Warning/Accent) */
+    
+    --primary-color: var(--color-dominican-blue);
+    --secondary-color: #059669; /* Verde para éxito/secundario */
+    --danger-color: var(--color-dominican-red);
+    --warning-color: var(--color-dominican-yellow);
+    
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --transition: all 0.2s ease;
+}
+
+/* ============================================
+   MODO OSCURO AUTOMÁTICO
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #5b9ff9; 
+        --secondary-color: #34d399;
+        --bg-primary: #1e293b;
+        --bg-secondary: #0f172a;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --border-color: #334155;
+    }
+}
+
+/* ============================================
+   RESET Y BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   MODO AHORRO - Desactiva animaciones
+   ============================================ */
+body.save-mode *,
+body.save-mode *::before,
+body.save-mode *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    /* Nuevo degradado de la bandera (Azul a Rojo) */
+    background: linear-gradient(135deg, var(--color-dominican-blue) 0%, var(--color-dominican-red) 100%);
+    color: white;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.header__controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: var(--transition);
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.btn:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn--primary {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn--primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.btn--secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn--secondary:hover:not(:disabled) {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+.btn--full {
+    width: 100%;
+    padding: 0.875rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+}
+
+.btn--sort {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn--sort:hover:not(:disabled) {
+    background-color: var(--border-color);
+}
+
+/* Botón de Ordenamiento ACTIVO usa el Amarillo Sol */
+.btn--sort.active {
+    background-color: var(--warning-color); 
+    color: var(--text-primary); 
+    border-color: var(--warning-color);
+    font-weight: 700;
+}
+
+/* ============================================
+   MAIN LAYOUT
+   ============================================ */
+.main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    flex: 1;
+    width: 100%;
+}
+
+/* ============================================
+   ALERT BAR
+   ============================================ */
+.alert-bar {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.alert-bar__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alert-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.alert-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.alert-toggle:hover {
+    background-color: var(--border-color);
+}
+
+.alert-toggle input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+/* ============================================
+   CONTENT GRID
+   ============================================ */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   INSTRUCTIONS
+   ============================================ */
+.instructions p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.instructions p:last-child {
+    margin-bottom: 0;
+}
+
+.instructions strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 44, 119, 0.2); /* Sombra con el azul dominicano */
+}
+
+.form-group input:invalid,
+.form-group select:invalid {
+    border-color: var(--danger-color);
+}
+
+/* ============================================
+   MAP CONTAINER
+   ============================================ */
+.map-container {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.map-svg {
+    width: 100%;
+    height: 400px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-secondary);
+}
+
+.map-svg text {
+    fill: var(--text-primary);
+}
+
+/* ============================================
+   RESULTS
+   ============================================ */
+.results {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.results__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.results__sort {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   ROUTE CARDS
+   ============================================ */
+.route-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.route-card:last-child {
+    margin-bottom: 0;
+}
+
+.route-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.route-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.75rem;
+}
+
+/* Tipos de Ruta (Para que el JavaScript funcione correctamente, deben añadirse las clases: .route-type--[tipo]) */
+.route-card__type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Colores por Tipo de Transporte (Dominicanizados) */
+.route-type--carro_publico {
+    background-color: var(--color-dominican-red); /* Rojo de la bandera */
+}
+
+.route-type--guagua_publica {
+    background-color: var(--primary-color); /* Azul de la bandera */
+}
+
+.route-type--motoconcho {
+    background-color: var(--color-dominican-yellow); /* Amarillo Sol */
+    color: var(--text-primary);
+}
+
+.route-type--carro_pirata {
+    background-color: var(--text-secondary); /* Gris, menos prominente */
+}
+
+.route-card__favorite {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--warning-color);
+    padding: 0;
+    line-height: 1;
+}
+
+.route-card__favorite:hover {
+    transform: scale(1.2);
+}
+
+.route-card__favorite:focus {
+    outline: 2px solid var(--warning-color);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+.route-card__info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.route-card__stat {
+    text-align: center;
+}
+
+.route-card__stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.route-card__stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.route-card__segments {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.segment {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.segment:last-child {
+    margin-bottom: 0;
+}
+
+.segment__icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.segment strong {
+    color: var(--text-primary);
+}
+
+.segment small {
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background-color: var(--bg-primary);
+    padding: 2rem 1rem;
+    margin-top: auto;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border-color);
+}
+
+.footer__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer__title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.footer__text {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.route-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .results__sort {
+        width: 100%;
+    }
+    
+    .btn--sort {
+        flex: 1;
+    }
+    
+    .header__container {
+        gap: 1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .header__title {
+        font-size: 1.25rem;
+    }
+    
+    .header__container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .header__controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .main {
+        margin: 1rem auto;
+    }
+    
+    .route-card__info {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .route-card__stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        padding: 0.5rem;
+        background-color: var(--bg-primary);
+        border-radius: 0.25rem;
+    }
+    
+    .route-card__stat-value {
+        order: 2;
+    }
+    
+    .route-card__stat-label {
+        order: 1;
+        margin-top: 0;
+    }
+    
+    .alert-bar__grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-svg {
+        height: 300px;
+    }
+    
+    .segment {
+        flex-wrap: wrap;
+    }
+    
+    .segment small {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+    
+    .card {
+        padding: 1rem;
+    }
+    
+    .btn {
+        font-size: 0.8125rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+    .header__title {
+        font-size: 1.125rem;
+    }
+    
+    .card__title {
+        font-size: 1.125rem;
+    }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+
+/* Reducir movimiento para usuarios con preferencias de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+    }
+    
+    .btn,
+    .route-card,
+    .card {
+        border-width: 3px;
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+    
+    .header__controls,
+    .alert-bar,
+    .btn,
+    .footer,
+    .route-card__favorite {
+        display: none !important;
+    }
+    
+    .main {
+        margin: 0;
+        padding: 1rem;
+    }
+    
+    .route-card {
+        page-break-inside: avoid;
+        border: 2px solid #000;
+        margin-bottom: 1rem;
+    }
+    
+    .map-svg {
+        border: 2px solid #000;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
